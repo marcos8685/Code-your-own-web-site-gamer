@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="pageCA1.css">
+    <style>
+        /* Your CSS styles */
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <ul class="topnav">
+        <li><a class="active" href="#home">Home</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li class="right"><a href="#about">About</a></li>
+    </ul>
+
+    <!-- Image -->
+    <div class="about-img2">
+        <img class="homeimage2" src="https://img.freepik.com/vetores-premium/coelho-gamer-kawaii_640621-62.jpg?w=740" />
+    </div>
+
+    <!-- Fullscreen button -->
+    <button id="enterFullscreen">Enter Fullscreen</button>
+
+    <!-- Slideshow container -->
+    <div class="slideshow-container">
+        <div class="mySlides fade">
+            <div class="numbertext">1 / 3</div>
+            <img src="https://via.placeholder.com/600" style="width:100%">
+            <div class="text">Caption Text</div>
+        </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">2 / 3</div>
+            <img src="https://via.placeholder.com/600" style="width:100%">
+            <div class="text">Caption Two</div>
+        </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">3 / 3</div>
+            <img src="https://img.freepik.com/free-vector/skull-gaming-with-joy-stick-emblem-modern-style_32991-492.jpg?t=st=1711020446~exp=1711024046~hmac=db9142a2b59655f2327ae6b6096f4029b80203790ad4fc5e0ffbad8e9fa4f992&w=740" style="width:100%">
+            <div class="text">Caption Three</div>
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">❮</a>
+        <a class="next" onclick="plusSlides(1)">❯</a>
+    </div>
+    <br>
+
+    <!-- Dots -->
+    <div style="text-align:center">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+    <footer>
+        This is the footer section. You can add your footer content here.
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const enterFullscreenButton = document.getElementById('enterFullscreen');
+            const img = document.querySelector('.homeimage2');
+
+            const toggleFullscreen = () => {
+                if (!document.fullscreenElement) {
+                    img.requestFullscreen().catch(err => {
+                        console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+                    });
+                } else {
+                    document.exitFullscreen();
+                }
+            };
+
+            enterFullscreenButton.addEventListener('click', () => {
+                toggleFullscreen();
+            });
+
+            const onChange = () => {
+                const isFullscreen = document.fullscreenElement === img;
+                enterFullscreenButton.style.display = isFullscreen ? 'none' : 'block';
+            };
+
+            document.addEventListener('fullscreenchange', onChange);
+        });
+
+        // Slideshow functions
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+        }
+    </script>
+</body>
+</html>
